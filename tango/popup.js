@@ -49,8 +49,8 @@ function solver() {
     const label = (contentCell) => contentCell.firstElementChild.lastElementChild.ariaLabel
 
     async function fetchGridData() {
-        const iframe = document.getElementsByClassName('game-launch-page__iframe')[0].contentDocument;
-        const gridElement = Array.from(iframe.getElementsByClassName('gil__grid')[0].children || document.getElementsByClassName('gil__grid')[0].children);
+        const iframe = document.getElementsByClassName('game-launch-page__iframe')?.[0]?.contentDocument;
+        const gridElement = Array.from(iframe?.getElementsByClassName('gil__grid')?.[0]?.children || document.getElementsByClassName('gil__grid')[0].children);
         let labels = gridElement.map(el => Array.from(el.children).filter(ch => ch.tagName !== "SPAN").map(ch => [ch.classList, ch.firstElementChild.ariaLabel]));
         console.log(iframe, gridElement, labels)
         for (let i = 0; i < labels.length; i++) {
