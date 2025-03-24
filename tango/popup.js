@@ -10,7 +10,7 @@ window.onload = function () {
                 func: solver
             })
         }).then((result) => {
-            document.getElementById('result').innerHTML = result.toString()
+            document.getElementById('result').innerHTML = result
         })
         start.style.disabled = true;
     })
@@ -132,17 +132,9 @@ function solver() {
         else if (uneqvalue) {
             grid[index] = !(uneqvalue - 1) + 1
         }
-        if (either) {
-            if (recurse(grid, index + 1, locked, equalPairs, unequalPairs)) return true
-            else {
-                console.log(index)
-                grid[index] = 0
-                return false
-            }
-        }
-
 
         for (let i of [1, 2]) {
+            if(either && i != grid[index]) continue
             grid[index] = i
             let r = getRow(grid, index)
             let c = getCol(grid, index)
@@ -166,6 +158,8 @@ function solver() {
         grid.forEach((val, index) => {
             for (let i = 0; i < val; i++) click(gridElement[index])
         })
-        return result.toString() + grid.toString()
+        const retVal =  result.toString() + grid.toString()
+        console.log(retVal)
+        return retVal
     })
 }
