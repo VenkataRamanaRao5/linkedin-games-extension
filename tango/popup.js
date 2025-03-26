@@ -50,8 +50,9 @@ function solver() {
 
     async function fetchGridData() {
         const iframe = document.getElementsByClassName('game-launch-page__iframe')?.[0]?.contentDocument;
-        const gridElement = Array.from(iframe?.getElementsByClassName('gil__grid')?.[0]?.children || document.getElementsByClassName('gil__grid')[0].children);
-        let labels = gridElement.map(el => Array.from(el.children).filter(ch => ch.tagName !== "SPAN").map(ch => [ch.classList, ch.firstElementChild.ariaLabel]));
+        let gridElement = Array.from(iframe?.getElementsByClassName('gil__grid')?.[0]?.children || document.getElementsByClassName('gil__grid')[0].children);
+        gridElement = gridElement.filter(el => el.tagName == "DIV")
+        let labels = gridElement.map(el => Array.from(el.children).filter(ch => ch.tagName == "DIV").map(ch => [ch.classList, ch.firstElementChild.ariaLabel])).filter(e => e.length);
         console.log(iframe, gridElement, labels)
         for (let i = 0; i < labels.length; i++) {
             labels[i][0] = labels[i][0][1] // remove class for content
